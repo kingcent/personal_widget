@@ -1,0 +1,560 @@
+macro GetCurrentProjectName()
+{
+    hprj = GetCurrentProj();
+    curPrjPath = GetProjName(hprj);
+    pathLen = strlen(curPrjPath);
+
+    index = pathLen - 1;
+    while (index >= 0) {
+        if (curPrjPath[index] == "\\") {
+            curPrjName = strmid(curPrjPath, index + 1, pathLen);
+            break;
+        } else {
+            index = index - 1;
+        }
+    }
+
+    return curPrjName;
+}
+
+// static
+macro GetCurrentFileDir()
+{
+    buf = GetCurrentBuf();
+    curFilePath = GetBufName(buf);
+    pathLen = strlen(curFilePath);
+
+    index = pathLen - 1;
+    while (index >= 0) {
+        if (curFilePath[index] == "\\") {
+            curFileDir = strmid(curFilePath, 0, index);
+            break;
+        } else {
+            index = index - 1;
+        }
+    }
+    return curFileDir;
+}
+
+/**
+ * Open the dir in the Project File Browser window,
+ * which contains the current opened file.
+ */
+macro ToProjectFileBrowserFolder()
+{
+    RunCmd("Project File Browser");
+
+//  curPrjName = GetCurrentProjectName();
+    curFileDir = GetCurrentFileDir();
+//  cmdLine = "D:\\SIToFolder.exe \"@curPrjName@ Project\"  \"@curFileDir@\"";
+//  RunCmdLine(cmdLine, Nil, 0);
+
+    exec_vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\setClipContent.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", exec_vbs_file_name);
+    args = " @curFileDir@";
+//  Msg(cat("getting into:",curFileDir));
+    cmdLine = cat(cmdLine, args);
+    RunCmdLine(cmdLine,Nil,0);
+}
+
+/**
+ * Open the dir in the explorer,
+ * which contains the current opened file.
+ */
+macro ToExplorerFolder()
+{
+    curFileDir = GetCurrentFileDir();
+    cmdLine = "explorer.exe \"@curFileDir@\"";
+    RunCmdLine(cmdLine, Nil, 0);
+}
+
+
+
+macro PauseCurrentBugfea()
+{
+    SI_PRJ_BASE_DIR = "C:\\Documents and Settings\\jshuang\\My Documents\\Source Insight\\Projects\\";
+    curPrjName = GetCurrentProjectName();
+    bugfea_filename = cat(cat(SI_PRJ_BASE_DIR,curPrjName),"\\RELEATED_BUGFEA.txt");
+
+    Msg(bugfea_filename);
+    hbuf = OpenBuf(bugfea_filename);
+
+    if(hbuf==hNil) {
+        msg("no such file");
+        return;
+    }
+
+    lineCnt = GetBufLineCount(hbuf);
+    i = 0;
+    while(i<lineCnt) {
+//      Msg(GetBufLine(hbuf, i));
+        i = i+1;
+    }
+    CloseBuf(hbuf);
+
+//  ShellExecute("open", "E:\software\TOOLS_BY_KC\TinyDevHelper\W_VBS\PauseCurrentBugfeaOnSI.vbs","","","");
+//  ShellExecute("open", "notepad.exe");
+    exec_vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\switchBugfeaStateOnSI.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", exec_vbs_file_name);
+    args = " @curPrjName@ WORKING_ON PAUSE";
+    cmdLine = cat(cmdLine, args);
+    RunCmdLine(cmdLine,Nil,0);
+}
+
+/*add the repo of this file to the current bugfea*/
+macro AddRepo()
+{
+    /*current dir*/
+    curFileDir = GetCurrentFileDir();
+    curPrjName = GetCurrentProjectName();
+    Msg(curFileDir)
+
+    /*find out the repo's location
+    *add repo's location to bugfea's RELATED_SOURCE_REPO.txt .
+    * strong recommand to show the result
+    */
+    exec_vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\addRepoToCurBugfea.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", exec_vbs_file_name);
+    args = " @curPrjName@ @curFileDir@";
+    cmdLine = cat(cmdLine, args);
+    RunCmdLine(cmdLine,Nil,0);
+
+}
+
+macro ShowGitBash()
+{
+    curFileDir = GetCurrentFileDir();
+
+    exec_vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\showGitBash.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", exec_vbs_file_name);
+    args = " @curFileDir@";
+
+    cmdLine = cat(cmdLine, args);
+    ret = RunCmdLine(cmdLine, curFileDir, 0);
+
+
+}
+
+
+macro MakePatch()
+{
+    curDir = GetCurrentFileDir();
+
+    /*choice a bugfea*/
+    temp_cur_bugfea_file_name = "E:\\TinyDevHelper_TEMP\\cur_bugfea.txt";
+    vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\choiceBugFea.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", vbs_file_name);
+    args = " @temp_cur_bugfea_file_name@";
+    cmdLine = cat(cmdLine, args);
+//  Msg(cmdLine);
+    ret = RunCmdLine(cmdLine, Nil, 1);
+
+
+    base = Ask("Which commit id(or tag/branch) is this patch base on?");
+    if (strlen(base)<6) {
+        Msg(" must longer than 6");
+        return;
+    }
+
+//  Msg(base);
+    /*use regulate expression to estimate directly commit id*/
+    base = tolower(base);
+    len = 0;
+    is_commitid = 1;
+    while(len<6) {
+        if(isNumber(base[len]) || base[len]=="a" || base[len]=="b" || base[len]=="c"
+           || base[len]=="d" || base[len]=="e" || base[len]=="f") {
+            len = len + 1;
+            continue;
+        } else {
+            is_commitid = 0;
+            break;
+        }
+    }
+
+//  Msg(is_commitid);
+
+    /*search manifest directory to get xml file name for 'base'*/
+    //tag_branch_xml =
+
+    /*get real commit id*/
+    //commit id = getCommitID(xml, reponame)
+
+    /*write commit id to a temp file*/
+    temp_commitid_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\temp_commit_id.txt";
+    vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\writeCommitidToTemp.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", vbs_file_name);
+    args = " @is_commitid@ @base@ @curDir@";
+    cmdLine = cat(cmdLine, args);
+//  Msg(cmdLine);
+    ret = RunCmdLine(cmdLine, Nil, 1);
+
+
+    ShowGitBash();
+
+}
+
+
+macro MakePatch4ThisRepo()
+{
+    curDir = GetCurrentFileDir();
+
+    /*choice a bugfea*/
+    temp_cur_bugfea_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\TinyDevHelper_TEMP\\cur_bugfea.txt";
+    vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\choiceBugFea.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", vbs_file_name);
+    args = " @temp_cur_bugfea_file_name@";
+    cmdLine = cat(cmdLine, args);
+//  Msg(cmdLine);
+    ret = RunCmdLine(cmdLine, Nil, 1);
+
+
+    base = Ask("Which commit id(or tag/branch,start *s* for short tag)\nis this patch base on?");
+    if (base[0]=="s") {
+        base = strmid(base, 2, strlen(base));
+        name_type = 2; // short tag name like:0808
+    } else if (strlen(base)<6) {
+        Msg(" must longer than 6");
+        return;
+        //  Msg(base);
+        /*use regulate expression to estimate directly commit id*/
+        base = tolower(base);
+        len = 0;
+        name_type = 1; //commit id
+        while(len<6) {
+            if(isNumber(base[len]) || base[len]=="a" || base[len]=="b" || base[len]=="c"
+               || base[len]=="d" || base[len]=="e" || base[len]=="f") {
+                len = len + 1;
+                continue;
+            } else {
+                name_type = 0; //xml file name for tag
+                break;
+            }
+        }
+    }
+
+
+//  Msg(is_commitid);
+
+    /*search manifest directory to get xml file name for 'base'*/
+    //tag_branch_xml =
+
+    /*get real commit id*/
+    //commit id = getCommitID(xml, reponame)
+
+    /*write commit id to a temp file*/
+    temp_commitid_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\temp_commit_id.txt";
+    vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\writeCommitidToTemp.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", vbs_file_name);
+//    args = " @is_commitid@ @base@ @curDir@";
+    args = " @name_type@ @base@ @curDir@";
+    cmdLine = cat(cmdLine, args);
+//  Msg(cmdLine);
+    ret = RunCmdLine(cmdLine, Nil, 1);
+
+
+    ShowGitBash();
+
+}
+
+macro Checkout()
+{
+    curDir = GetCurrentFileDir();
+
+
+
+    base = Ask("Which commit id(or tag/branch,start *s* for short tag)\nyou want to checkout?");
+    if (base[0]=="s") {
+        base = strmid(base, 2, strlen(base));
+        name_type = 2; // short tag name like:0808
+    } else if (strlen(base)<6) {
+        Msg(" must longer than 6");
+        return;
+        //  Msg(base);
+        /*use regulate expression to estimate directly commit id*/
+        base = tolower(base);
+        len = 0;
+        name_type = 1; //commit id
+        while(len<6) {
+            if(isNumber(base[len]) || base[len]=="a" || base[len]=="b" || base[len]=="c"
+               || base[len]=="d" || base[len]=="e" || base[len]=="f") {
+                len = len + 1;
+                continue;
+            } else {
+                name_type = 0; //xml file name for tag
+                break;
+            }
+        }
+    }
+
+
+
+//  Msg(is_commitid);
+
+    /*search manifest directory to get xml file name for 'base'*/
+    //tag_branch_xml =
+
+    /*get real commit id*/
+    //commit id = getCommitID(xml, reponame)
+
+    /*write commit id to a temp file*/
+    temp_commitid_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\TinyDevHelper_TEMP\\temp_commit_id_for-checkout.txt";
+    vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\writeCommitidToTemp.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", vbs_file_name);
+    args = " @name_type@ @base@ @curDir@ @temp_commitid_file_name@";
+    cmdLine = cat(cmdLine, args);
+//  Msg(cmdLine);
+    ret = RunCmdLine(cmdLine, Nil, 1);
+//		Msg(cat("RunCmdLine return: ",ret));
+
+    ShowGitBash();
+
+}
+
+
+macro MarkATag()
+{
+    curDir = GetCurrentFileDir();
+
+
+
+    base = Ask("Which commit id(or tag/branch,start *s* for short tag)\nyou want to checkout?");
+    if (base[0]=="s") {
+        base = strmid(base, 2, strlen(base));
+        name_type = 2; // short tag name like:0808
+    } else if (strlen(base)<6) {
+        Msg(" must longer than 6");
+        return;
+        //  Msg(base);
+        /*use regulate expression to estimate directly commit id*/
+        base = tolower(base);
+        len = 0;
+        name_type = 1; //commit id
+        while(len<6) {
+            if(isNumber(base[len]) || base[len]=="a" || base[len]=="b" || base[len]=="c"
+               || base[len]=="d" || base[len]=="e" || base[len]=="f") {
+                len = len + 1;
+                continue;
+            } else {
+                name_type = 0; //xml file name for tag
+                break;
+            }
+        }
+    }
+
+
+    /*write commit id to a temp file*/
+    temp_commitid_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\TinyDevHelper_TEMP\\temp_commitid_for-marktag.txt";
+    vbs_file_name = "D:\\software\\TOOLS_BY_KC\\TinyDevHelper\\W_VBS\\writeCommitidToTemp.vbs";
+    cmdLine = cat("wscript.exe //e:vbscript ", vbs_file_name);
+    args = " @name_type@ @base@ @curDir@ @temp_commitid_file_name@";
+    cmdLine = cat(cmdLine, args);
+//  Msg(cmdLine);
+    ret = RunCmdLine(cmdLine, Nil, 1);
+//Msg(cat("RunCmdLine return: ",ret));
+
+    ShowGitBash();
+
+}
+
+
+macro WhatIsWorkingOn()
+{
+    SI_PRJ_BASE_DIR = "C:\\Documents and Settings\\jshuang\\My Documents\\Source Insight\\Projects\\";
+    curPrjName = GetCurrentProjectName();
+    bugfea_filename = cat(cat(SI_PRJ_BASE_DIR,curPrjName),"\\RELEATED_BUGFEA.txt");
+
+    STR_CMP = "WORKING_ON";
+    CMP_LEN = strlen(STR_CMP);
+
+    hbuf = OpenBuf(bugfea_filename);
+    lineCnt = GetBufLineCount(hbuf);
+    i = 0;
+    while(i<lineCnt) {
+        str = GetBufLine(hbuf,i);
+        i = i+1;
+
+//      Msg(str);
+        j = 0;
+        while(j<CMP_LEN) {
+            if (str[j] ==STR_CMP[j]) {
+                j = j + 1;
+            } else {
+                j = 100; //break
+            }
+        }
+        if (j==CMP_LEN) { //match STR_CMP
+            i = 1000;//break
+            Msg(str);
+        }
+    }
+    CloseBuf(hbuf);
+
+}
+
+
+
+macro ToTotalcommandRightWindowFolder()
+{
+    curFileDir = GetCurrentFileDir();
+//  ShellExecute("","C:\\totalcmd\\TOTALCMD.EXE","/R=\"E:\" /O /T","",1); it works
+    ShellExecute("","C:\\totalcmd\\TOTALCMD64.EXE","/R=\"@curFileDir@\" /O /T","",1);
+}
+
+macro AddOneFile(hbuf, id, name, type,path)
+{
+    rec = nil;
+    rec.id = id;
+    rec.name = name;
+    rec.type = type;
+    rec.path = path;
+    AppendBufLine(hbuf,rec);
+}
+
+macro OpenFiles()
+{
+    var pathWanted;
+    var pathType;
+
+    var PROJECT_VERSE_CNT;
+    PROJECT_BASE_1 = "d:\\software\\sitofolder\\";
+    PROJECT_BASE_2 = "m:\\huangjinsheng\\702a_0702_dusb\\";
+    hbuf_prj_collection = NewBuf("projects");
+    AppendBufLine(hbuf_prj_collection, "d:\\software\\sitofolder");
+    AppendBufLine(hbuf_prj_collection, "n:\\702a_bf6\\");
+    AppendBufLine(hbuf_prj_collection, "m:\\huangjinsheng\\702a_0702_dusb\\");
+    AppendBufLine(hbuf_prj_collection, "m:\\huangjinsheng\\702c2\\");
+    AppendBufLine(hbuf_prj_collection, "n:\\702c\\");
+    AppendBufLine(hbuf_prj_collection, "n:\\702a2_130906\\");
+
+    PROJECT_VERSE_CNT = GetBufLineCount(hbuf_prj_collection);
+
+    buf = GetCurrentBuf();
+    curFilePath = GetBufName(buf);
+    hbuf = NewBuf("Files for fast-open");
+    //AppendBufLine(hbuf, "Type the id of folder or file you want to open");
+    //AppendBufLine(hbuf, "====================================");
+    //AppendBufLine(hbuf, " ");
+    //  AddOneFile(hbuf,nil,nil,"Type the id of folder or file you want to open");
+    AddOneFile(hbuf,"1v","vold",1,"android\\system\\vold");
+    AddOneFile(hbuf,nil, nil, 2, "----------------");
+    AddOneFile(hbuf,"2m","monitor",1,"leopard\\platform\\drivers\\usb\\monitor");
+    AddOneFile(hbuf,"2sh","usbmond.sh",0,"leopard\\build\\gs702a\\prebuilt\\initramfs\\usbmond.sh");
+    AddOneFile(hbuf,"2shc","usbmond.sh",0,"leopard\\build\\gs702c\\prebuilt\\initramfs\\usbmond.sh");
+
+    hwnd = NewWnd(hbuf);    //show the prompts in a temp window
+    file_id = Ask("which folder or file you want to open?");
+//   Msg(cat("file_id:",file_id));
+    bufLineCnt = GetBufLineCount(hbuf);
+    curLine = 0;
+    pathWanted = "";
+    while(curLine < bufLineCnt) {
+        rec = GetBufLine(hbuf,curLine);
+        if(rec.id !=nil && rec.id == file_id) {
+            pathWanted = rec.path;
+            pathType = rec.type;
+            break;
+        }
+        curLine = curLine + 1;
+    }
+//   Msg(pathWanted);
+    if(pathWanted != "") {
+        /*get the project base dir*/
+        curFilePath = tolower(curFilePath);
+        curPrjIndex = PROJECT_VERSE_CNT;
+        project_base_hit = "";
+        while(curPrjIndex > 0) {
+            curPrjIndex = curPrjIndex  - 1;
+            curPrj = GetBufLine(hbuf_prj_collection, curPrjIndex);
+            prj_path_len = strlen(curPrj);
+            cur_index = 0;
+            while(cur_index < prj_path_len) {
+                cur_index = cur_index + 1;
+                if(curPrj[cur_index]  != curFilePath[cur_index])
+                    break;
+            }
+            if (cur_index == prj_path_len) { //equals to cur project dir
+                project_base_hit = curPrj;
+                break;
+            }
+        }
+
+        /*open the meaning folder or file*/
+//       Msg(project_base_hit);
+//       Msg(cat("pathType: ",pathType);
+        if(project_base_hit != "") {
+            filepath = cat(project_base_hit,pathWanted);
+            if(pathType == 1) {
+                Msg(cat("getinto2 ",filepath));
+                curPrjName = GetCurrentProjectName();
+                RunCmd("Project File Browser");
+                ShellExecute("open", "D:\\SIToFolder.exe", "\"@curPrjName@ Project\"  \"@filepath@\"", "",1);
+            } else if(pathType == 0) {
+                Msg(cat("open ",filepath));
+                hbuf_temp = OpenBuf(filepath);
+                if (hbuf_temp==nil)
+                    msg("hell, it is nil");
+                SetCurrentBuf(hbuf_temp);
+                //   CloseBuf(hbuf_temp);
+            }
+        }
+        /*
+                if(pathType == 1) {
+                    Msg(cat("getting into", pathWanted));
+                    Msg(cat("opening ", pathWanted));
+                    Msg(cat("curFilePath ",curFilePath));
+                    curFilePath = tolower(curFilePath);
+                    curPrjIndex = PROJECT_VERSE_CNT;
+                    project_base_hit = "";
+                    while(curPrjIndex > 0) {
+                        curPrjIndex = curPrjIndex  - 1;
+                        prj_path_len = strlen(PROJECT_BASE_1);
+                        cur_index = 0;
+                        while(cur_index < prj_path_len) {
+                            cur_index = cur_index + 1;
+                            if(PROJECT_BASE_1[cur_index]  != curFilePath[cur_index])
+                                break;
+                        }
+                        if (cur_index == prj_path_len) { //equals to cur project dir
+                            project_base_hit = PROJECT_BASE_1;
+                            break;
+                        }
+                    }
+                    if(project_base_hit != "") {
+                        filepath = cat(project_base_hit,pathWanted);
+                        Msg(cat("getinto ",filepath));
+                    }
+
+                } else if (pathType == 0 ) {
+                    Msg(cat("opening ", pathWanted));
+                    Msg(cat("curFilePath ",curFilePath));
+                    curFilePath = tolower(curFilePath);
+                    curPrjIndex = PROJECT_VERSE_CNT;
+                    project_base_hit = "";
+                    while(curPrjIndex > 0) {
+                        curPrjIndex = curPrjIndex  - 1;
+                        prj_path_len = strlen(PROJECT_BASE_1);
+                        cur_index = 0;
+                        while(cur_index < prj_path_len) {
+                            cur_index = cur_index + 1;
+                            if(PROJECT_BASE_1[cur_index]  != curFilePath[cur_index])
+                                break;
+                        }
+                        if (cur_index == prj_path_len) { //equals to cur project dir
+                            project_base_hit = PROJECT_BASE_1;
+                            break;
+                        }
+                    }
+                    if(project_base_hit != "") {
+                        filepath = cat(project_base_hit,pathWanted);
+                        Msg(cat("open ",filepath));
+                    }
+
+                }
+                */
+    }
+    CloseWnd(hwnd);
+    CloseBuf(hbuf);
+    CloseBuf(hbuf_prj_collection);
+}
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#cd "/m/huangjinsheng/702c/leopard/platform/drivers/usb/monitor" && gitk --all
+#cd $1 && git status
+git status

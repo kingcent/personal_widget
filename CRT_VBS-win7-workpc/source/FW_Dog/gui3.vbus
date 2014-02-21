@@ -1,0 +1,4 @@
+Set ie = CreateObject("InternetExplorer.Application")
+ie.Navigate "http://bbs.iaixue.com/login.php"
+Wscript.Sleep 1000
+ie.visible=true

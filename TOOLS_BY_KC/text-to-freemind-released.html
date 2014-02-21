@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.language" content="en" />
+<meta name="DC.title" content="uwstopia &#x2605; Blog &#x2605; Text-to-Freemind released!" />
+<meta name="DC.creator" content="Wouter Bolsterlee" />
+<meta name="generator" content="Almost No Effort Web Toolkit (Anewt)" />
+<title>uwstopia &#x2605; Blog &#x2605; Text-to-Freemind released!</title>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<link href="/style/screen.css" rel="stylesheet" media="screen" type="text/css" />
+<link href="/style/print.css" rel="stylesheet" media="print" type="text/css" />
+<script type="text/javascript" src="/javascript/hoverbox.js"></script>
+<link href="/blog/feed" rel="alternate" title="Recent blog posts from
+						uwstopia" type="application/rss+xml" />
+<link href="/foaf.rdf" rel="meta" title="Friend of a friend (FOAF)" type="application/rdf+xml" />
+</head>
+<body>
+<div id="wrapper">
+<div id="logo"><a href="/"><img src="/img/uwstopia/logo.png" alt="uwstopia" /></a></div>
+<div id="body"><div class="infoblock"><p><strong>You're viewing a single post.</strong> I have much more to
+		say! <a href="/blog">The main blog page is a good starting point.</a></p></div>
+<h1>Text-to-Freemind released!</h1>
+<p class="postinfo">Monday, October  1, 2007 &#x2605; 09:22 &#x2605; Category <a href="/blog/category/programming">Programming</a></p>
+<p>I&#8217;m happy to announce the first (and perhaps even last) version of <strong>text-to-freemind</strong>, a simple text to <a href="http://freemind.sourceforge.net/">FreeMind</a> conversion program, licensed under the GPL.</p>
+
+	<p>This program converts tab-indented text files into an XML format suitable for display by FreeMind. It was written out of annoyance with the FreeMind user interface, and the lack of &#8216;merging&#8217; capabilities when collaborating with other people.</p>
+
+	<p>Input like this (indentation should be done using tabs)...</p>
+
+<pre>uws
+    superhero
+    hacker
+        gnome
+        web</pre>
+
+	<p>...results in:</p>
+
+	<p class="image"><img src="/files/2007/10/text-to-freemind-sample.png" title="Text-to-Freemind sample output" alt="Text-to-Freemind sample output" /></p>
+
+	<h2>Usage</h2>
+
+	<p>Usage is like most command line programs. Proceed as below. To convert a single text file into a Freemind file, use:</p>
+
+<pre>text-to-freemind input-file.txt.mm &gt; output-file.mm</pre>
+
+	<p>You can use it as a filter (using shell pipes) as well:</p>
+
+<pre>cat some-text-data.mm.txt | text-to-freemind &gt; output-file.mm</pre>
+
+	<p>A Makefile snippet is also included to convert all <code>*.mm.txt</code> files into their <code>*.mm</code> counterparts. First copy or symlink the makefile, than run make.</p>
+
+<pre>cp /path/to/text-to-freemind/text-to-freemind.make Makefile
+make</pre>
+
+	<p>Alternatively:</p>
+
+<pre>ln -s /path/to/text-to-freemind/text-to-freemind.make Makefile
+make</pre>
+
+	<p>Or execute the <code>Makefile</code> directly if you don&#8217;t want to copy files around:</p>
+
+<pre>/path/to/text-to-freemind/text-to-freemind.make</pre>
+
+	<p>Of course you have to <code>chmod +x text-to-freemind.make</code> first.</p>
+
+	<h2>Requirements</h2>
+
+	<p>The conversion program is written in Python (tested with 2.4 and 2.5) and requires an ElementTree implementation. Install <code>python-elementtree</code> or <code>python-celementtree</code> (included in Python 2.5) if you run into programs.</p>
+
+	<p>The <code>Makefile</code> snippet obviously depends on the make utility. GNU/Make is known to work.</p>
+
+	<h2>Get it!</h2>
+
+	<p>Code is available from the <a href="/geek/projects/text-to-freemind/text-to-freemind.uws/">Text-to-Freemind bazaar branch</a> (use <code>bzr branch</code> on that url to get it).</p>
+
+	<p>If you don&#8217;t feel like messing with version control systems, just copy the <code>text-to-freemind</code> and <code>text-to-freemind.make</code> files somewhere in your <code>$PATH</code> (make sure you set the executable bit on both).</p>
+
+	<h2>Issues, problems, and feedback</h2>
+
+	<p>This program is a quick hack, so don&#8217;t expect too much of it. If you feel like contacting me with problems or suggestions, please mail me. Thanks.</p>
+
+	<p><em>Update:</em> I&#8217;ve improved the error message syntax and the input encoding assumptions (always UTF-8 now).</p></div>
+<div id="right"><div id="navigation"><ul><li class="active"><a href="/blog/">Blog</a></li>
+<li><a href="/about/">About</a></li>
+<li><a href="/photo/">Photo</a></li>
+<li><a href="/geek/">Geek</a></li></ul></div>
+<p class="photo"><a href="/photo/2006/02/ireland/img_3819/"><img src="/photo/2006/02/ireland/img_3819.sidebar.jpg" alt="Roadtrip in Ireland" title="Roadtrip in Ireland" /></a></p>
+<p class="caption">Random photo from <a href="/photo/2006/02/ireland/">Ireland</a> (February, 2006)</p>
+<h2>Who wrote all this?</h2>
+
+		<p><strong>Wouter Bolsterlee</strong>, also known as
+		<strong>uws</strong>, a postmodern geek living in the Netherlands. <a
+		href="/about/">Read more about me&#8230;</a></p>
+<h2>Stay informed</h2>
+<p><a href="/blog/feed">RSS 2.0 feed</a></p>
+<p><a href="http://planet.gnome.org/">On Planet Gnome</a></p>
+<p><a href="http://planet.nl.gnome.org/">On Planet Gnome-NL</a></p>
+<h2>Blog archives</h2>
+<p><a href="/blog">Recent posts</a></p>
+<p><a href="/blog/2013/06">June 2013</a></p>
+<p><a href="/blog/2012/05">May 2012</a></p>
+<p><a href="/blog/2011/04">April 2011</a></p>
+<p><a href="/blog/2010/07">July 2010</a></p>
+<p><a href="/blog/2010/05">May 2010</a></p>
+<p><a href="/blog/2010/04">April 2010</a></p>
+<p><a href="/blog/2010/02">February 2010</a></p>
+<p><a href="/blog/2009/11">November 2009</a></p>
+<p><a href="/blog/2009/09">September 2009</a></p>
+<p><a href="/blog/2009/07">July 2009</a></p>
+<p><a href="/blog/2009/05">May 2009</a></p>
+<p><a href="/blog/2009/03">March 2009</a></p>
+<p><a href="/blog/2009/02">February 2009</a></p>
+<p><a href="/blog/2009/01">January 2009</a></p>
+<p><a href="/blog/2008/12">December 2008</a></p>
+<p><a href="/blog/2008/11">November 2008</a></p>
+<p><a href="/blog/2008/10">October 2008</a></p>
+<p><a href="/blog/2008/09">September 2008</a></p>
+<p><a href="/blog/2008/08">August 2008</a></p>
+<p><a href="/blog/2008/07">July 2008</a></p>
+<p><a href="/blog/2008/06">June 2008</a></p>
+<p><a href="/blog/2008/05">May 2008</a></p>
+<p><a href="/blog/2008/04">April 2008</a></p>
+<p><a href="/blog/2008/03">March 2008</a></p>
+<p><a href="/blog/2008/02">February 2008</a></p>
+<p><a href="/blog/2008/01">January 2008</a></p>
+<p><a href="/blog/2007/12">December 2007</a></p>
+<p><a href="/blog/2007/11">November 2007</a></p>
+<p><a href="/blog/2007/10">October 2007</a></p>
+<p><a href="/blog/2007/09">September 2007</a></p>
+<p><a href="/blog/2007/08">August 2007</a></p>
+<p><a href="/blog/2007/07">July 2007</a></p>
+<p><a href="/blog/2007/06">June 2007</a></p>
+<p><a href="/blog/2007/05">May 2007</a></p>
+<p><a href="/blog/2007/04">April 2007</a></p>
+<p><a href="/blog/2007/03">March 2007</a></p>
+<p><a href="/blog/2007/02">February 2007</a></p>
+<p><a href="/blog/2007/01">January 2007</a></p>
+<p><a href="/blog/2006/12">December 2006</a></p>
+<p><a href="/blog/2006/11">November 2006</a></p>
+<p><a href="/blog/2006/10">October 2006</a></p>
+<p><a href="/blog/2006/09">September 2006</a></p>
+<p><a href="/blog/2006/08">August 2006</a></p>
+<p><a href="/blog/2006/07">July 2006</a></p>
+<p><a href="/blog/2006/06">June 2006</a></p>
+<p><a href="/blog/2006/05">May 2006</a></p>
+<p><a href="/blog/2006/04">April 2006</a></p>
+<p><a href="/blog/2006/03">March 2006</a></p>
+<p><a href="/blog/2006/02">February 2006</a></p>
+<p><a href="/blog/2006/01">January 2006</a></p>
+<p><a href="/blog/2005/12">December 2005</a></p>
+<p><a href="/blog/2005/11">November 2005</a></p>
+<p><a href="/blog/2005/10">October 2005</a></p>
+<p><a href="/blog/2005/09">September 2005</a></p>
+<p><a href="/blog/2005/08">August 2005</a></p>
+<p><a href="/blog/2005/07">July 2005</a></p>
+<p><a href="/blog/2005/06">June 2005</a></p>
+<h2>Copyright</h2>
+<p>Unless stated otherwise, all material on this site is
+				available under a <a
+				href="http://creativecommons.org/licenses/by-sa/3.0/">Creative
+				Commons Share-Alike</a> license.</p></div>
+<div id="footer"><p>&#160;</p></div>
+</div>
+</body>
+</html>

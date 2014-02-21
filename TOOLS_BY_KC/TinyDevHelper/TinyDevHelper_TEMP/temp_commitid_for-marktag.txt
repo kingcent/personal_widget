@@ -1,0 +1,5 @@
+base=39d18eb6052d77b5620795000e3467b0a2b5e3b3
+basetag=0906
+tag_fullname=TAG_GS702A2_4210_130906
+git_dir=m:/huangjinsheng/702a2/leopard/platform/drivers/usb/gadget/
+prj_dir=m:/huangjinsheng/702a2/

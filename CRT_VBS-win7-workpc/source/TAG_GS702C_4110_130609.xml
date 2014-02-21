@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote fetch="git@fwgitsrv:ZH/actions/GL5202" name="gl5202" review="notused.actions-semi.com"/>
+  
+  <default remote="gl5202" revision="refs/heads/zh/GS702C_Integration"/>
+  
+  <project name="leopard/build/config" path="build/config" revision="6baa8cdacf5840dab31ad13bf7e1cf88ffccc539"/>
+  <project name="leopard/build/gs702c" path="build/gs702c" revision="6ba9f380bd4e6910934d597a5c4d50eb06ebd499"/>
+  <project name="leopard/kernel/build" path="kernel/build" revision="b4197412772b23d1599c9abe83335908478a8576"/>
+  <project name="leopard/kernel/linux-3.4" path="kernel/linux-3.4" revision="664c111c652670a0acd538caf80c1fe376ba012d"/>
+  <project name="leopard/kernel/linux-3.4-release_GS702C" path="kernel/linux-3.4-release" revision="2a8ed70519ef260ac4a0c29b932510e0d9acedcd"/>
+  <project name="leopard/platform/drivers/atc260x" path="platform/drivers/atc260x" revision="b56e47e593521f27cf9dccde7c4236b93cede640"/>
+  <project name="leopard/platform/drivers/audio" path="platform/drivers/phoneaudio" revision="e34b902e3e3af3cde77859abb3c6a6c15764fb4a"/>
+  <project name="leopard/platform/drivers/bluetooth" path="platform/drivers/bluetooth" revision="e34b902e3e3af3cde77859abb3c6a6c15764fb4a"/>
+  <project name="leopard/platform/drivers/boot/lcd" path="platform/drivers/boot_lcd" revision="75355283f7fd506d4a71920811677c2b121852e7"/>
+  <project name="leopard/platform/drivers/camera" path="platform/drivers/camera" revision="d58dd28925d6be354cee02c1b0176aca4fbf84b0"/>
+  <project name="leopard/platform/drivers/display" path="platform/drivers/display" revision="c158214880299db8c66f02a9e79b490e0aa3614f"/>
+  <project name="leopard/platform/drivers/gauge" path="platform/drivers/gauge" revision="dd79e393a5c6452b5c937a5cc1c6c3fa34f075fa"/>
+  <project name="leopard/platform/drivers/gsensor" path="platform/drivers/gsensor" revision="0d7116a634bb803db04f618eab2445bc856bda50"/>
+  <project name="leopard/platform/drivers/gyrosensor" path="platform/drivers/gyrosensor" revision="67d25a856fd4e3ffc02b1d812c716b61f1f4c8ad"/>
+  <project name="leopard/platform/drivers/hdmi" path="platform/drivers/hdmi" revision="7dbf626793b00609c2b8c8b36e589609311ab6a0"/>
+  <project name="leopard/platform/drivers/key" path="platform/drivers/key" revision="19de18d6f30283411e984a202a4047d88db687f3"/>
+  <project name="leopard/platform/drivers/lcd" path="platform/drivers/lcd" revision="016dc28ff8c12fcae263e8949908199d9009a882"/>
+  <project name="leopard/platform/drivers/lightsensor" path="platform/drivers/lightsensor" revision="ba653b812b331d0e7d014b1b5497038d051b8662"/>
+  <project name="leopard/platform/drivers/magsensor" path="platform/drivers/magsensor" revision="5046b1912a78f38a7075e8f1bf5452a5748b8c24"/>
+  <project name="leopard/platform/drivers/mmc" path="platform/drivers/mmc" revision="117ce8cff87ffe69aa837e67fe4daa8aa46f20d1"/>
+  <project name="leopard/platform/drivers/mobile" path="platform/drivers/mobile" revision="b7a607913fd30ebd61815bf9db9a684c8448ffa1"/>
+  <project name="leopard/platform/drivers/mtk4in1" path="platform/drivers/mtk4in1" revision="0c2d5ba57af975732322904ccbd108dfd0af1f7c"/>
+  <project name="leopard/platform/drivers/qboot" path="platform/drivers/qboot" revision="e34b902e3e3af3cde77859abb3c6a6c15764fb4a"/>
+  <project name="leopard/platform/drivers/sndrv" path="platform/drivers/sndrv" revision="26e4ca73091a6a7ea3fe4db640901996fd58815c"/>
+  <project name="leopard/platform/drivers/tp" path="platform/drivers/tp" revision="086aa04456c1be7ddf68dcf530c11f90d2d78d38"/>
+  <project name="leopard/platform/drivers/usb/aotg_hcd" path="platform/drivers/usb/aotg_hcd" revision="1416ee5af5a950fbe22baad7dd76895ad6922531"/>
+  <project name="leopard/platform/drivers/usb/aotg_hcd_hub" path="platform/drivers/usb/aotg_hcd_hub" revision="e34b902e3e3af3cde77859abb3c6a6c15764fb4a"/>
+  <project name="leopard/platform/drivers/usb/aotg_udc" path="platform/drivers/usb/aotg_udc" revision="ffdf0e767cd12d60fb55eb76b3b78f11a7d4ddf9"/>
+  <project name="leopard/platform/drivers/usb/core" path="platform/drivers/usb/core" revision="dd1903c2c9493d19ebf9eeb2abb9a42163759711"/>
+  <project name="leopard/platform/drivers/usb/dwc3" path="platform/drivers/usb/dwc3" revision="04e99a72139b62f46057571d4256e75f04770b07"/>
+  <project name="leopard/platform/drivers/usb/gadget" path="platform/drivers/usb/gadget" revision="ccf56ea262f122e58d37435d42982603191daf2c"/>
+  <project name="leopard/platform/drivers/usb/monitor" path="platform/drivers/usb/monitor" revision="d09febd38d2747176fc389cd157e2a550c620188"/>
+  <project name="leopard/platform/drivers/usb/usb_wifi" path="platform/drivers/usb/usb_wifi" revision="b26ce35ed915abc15c261cab3685855107bb9af2"/>
+  <project name="leopard/platform/drivers/usb/usbnet" path="platform/drivers/usb/usbnet" revision="93252b5f7eb17b160008d44a24c34d8bfaa7e6a7"/>
+  <project name="leopard/platform/drivers/usb/xhci" path="platform/drivers/usb/xhci" revision="3ddc0858138922cf8ce2041a42371f2471da42ed"/>
+  <project name="leopard/platform/drivers/utls" path="platform/drivers/utls" revision="e34b902e3e3af3cde77859abb3c6a6c15764fb4a"/>
+  <project name="leopard/platform/drivers/vce" path="platform/drivers/vce" revision="2086bbcef7c471a999ab301289c65bef98c9d6fd"/>
+  <project name="leopard/platform/drivers/vde" path="platform/drivers/vde" revision="5bb880f93c5c5facfe3e1054b6a7934274ec1430"/>
+  <project name="leopard/platform/drivers/vibrate" path="platform/drivers/vibrate" revision="684359ff249d235a64d9c63f7007e6780f4f407a"/>
+  <project name="leopard/platform/drivers/wifi/open" path="platform/drivers/wifi/open" revision="4907e901471d4044e1823bce638f9e0c24b22e1e"/>
+  <project name="leopard/platform/include" path="platform/include" revision="df05973363667a9e448236d91ef428fdecc126ee"/>
+  <project name="leopard/platform/utils/busybox" path="platform/utils/busybox" revision="734f397c8e9539bcf065996859fb9647ba24f7ed"/>
+  <project name="leopard/platform/utils/dosfstools-3.0.12" path="platform/utils/dosfstools-3.0.12" revision="935db932018a05fce43f540255bccdfb7c127b91"/>
+  <project name="leopard/platform/utils/e2fsprogs" path="platform/utils/e2fsprogs" revision="c755ddd7d48ef21e07aea08a4f9eb90044092ec5"/>
+  <project name="leopard/platform/utils/iostat" path="platform/utils/iostat" revision="a071a3a682d72a0acb3e585bbe74421a86644b6e"/>
+  <project name="leopard/platform/utils/makebootfat" path="platform/utils/makebootfat" revision="4ac8ed557695c68798762e102bdf8b1bb505d209"/>
+  <project name="leopard/platform/utils/strace" path="platform/utils/strace" revision="5e911aeffe57218c0a5ec9beb53be3b3c74ac882"/>
+  <project name="leopard/platform/utils/wireless_tools" path="platform/utils/wireless_tools" revision="9140ab786b509b282fc0d63e76ee09df6726fca4"/>
+  <project name="leopard/tools/adb_drv" path="tools/adb_drv" revision="05c237bfd8b4c8c3c4177a3889f6ba5267c360ec"/>
+  <project name="leopard/tools/fw_maker" path="tools/fw_maker" revision="5f2ee0599daa2366865951aa936b77aa207f2375"/>
+  <project name="leopard/tools/res_builder" path="tools/res_builder" revision="e34b902e3e3af3cde77859abb3c6a6c15764fb4a"/>
+  <project name="protect/leopard/platform/boot/adfu" path="platform/boot/adfu" revision="eb0908866ae8f0d4cc5c71f74d2b155e72fdaf19"/>
+  <project name="protect/leopard/platform/boot/common" path="platform/boot/common" revision="36dca3ce77d24eb1e40839e322e50b5d0f8ebfc4"/>
+  <project name="protect/leopard/platform/boot/config" path="platform/boot/config" revision="a313a21f448848142093965c969c86ae24b5e824"/>
+  <project name="protect/leopard/platform/boot/encrypt" path="platform/boot/encrypt" revision="6aade349297f8cf6825ff978ccc079017539ed5a"/>
+  <project name="protect/leopard/platform/boot/include" path="platform/boot/include" revision="94510f78a5047a646b6d7238a1a15f7398bae1bb"/>
+  <project name="protect/leopard/platform/boot/mbrc" path="platform/boot/mbrc" revision="8357eb3f73c2c40853b951c0dd6dd65ce059ac9b"/>
+  <project name="protect/leopard/platform/boot/upgrade_app" path="platform/boot/upgrade_app" revision="0baa90372a031e3e6dfd67bd2657fe8af559d334"/>
+  <project name="protect/leopard/platform/drivers/adfus" path="platform/drivers/usb/adfus" revision="832c4b99a45013b977a2bee38a85ea8b214bcf44"/>
+  <project name="protect/leopard/platform/drivers/boot_startup" path="platform/drivers/boot_startup" revision="ccfbd6a6842bc3103c96f5dbcaa57fe30dbb4da7"/>
+  <project name="protect/leopard/platform/drivers/cpufreq" path="platform/drivers/cpufreq" revision="917022d44cf32bb93551104edf07f15d64f077b8"/>
+  <project name="protect/leopard/platform/drivers/flash" path="platform/drivers/flash" revision="dbc621e7ed6838f410ead3f04896a7cdb4ef07da"/>
+  <project name="protect/leopard/platform/drivers/sgxgpu" path="platform/drivers/sgxgpu" revision="73ddf1f6a51efd2e779dd335fd225f9cd422475d"/>
+  <project name="protect/leopard/platform/drivers/wifi/NDA" path="platform/drivers/wifi/NDA" revision="7355337ce739d4f585f7b303e14f7b74406c312c"/>
+</manifest>

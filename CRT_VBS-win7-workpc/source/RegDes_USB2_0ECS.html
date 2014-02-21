@@ -1,0 +1,255 @@
+<html>
+
+<body>
+<table width="544" border="1" id="datatable">
+  <caption>
+    Register data of
+  USB2_0ECS
+  </caption>
+  <tr>
+    <th width="32" scope="col">Bits</th>
+    <th width="40" scope="col">Value</th>
+    <th width="42" scope="col">Name</th>
+    <th width="324" scope="col">Description</th>
+    <th width="72" scope="col">&nbsp;</th>
+  </tr>
+  <tr>
+    <td>31</td>
+    <td name="val-31">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><p>&nbsp;</p>    </td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>30</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>29</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>28</td>
+    <td>&nbsp;</td>
+    <td>Condet_en</td>
+    <td>Connect and disconnect enable</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>27</td>
+    <td>&nbsp;</td>
+    <td>softid</td>
+    <td>Softid value.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>26</td>
+    <td>&nbsp;</td>
+    <td>softiden</td>
+    <td>If this bit is 1, internal id state is determined by softid value,<br>
+    else it¡¯s determined by id pin.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>25</td>
+    <td>&nbsp;</td>
+    <td>softvbus</td>
+    <td>Softvbus value.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>24</td>
+    <td>&nbsp;</td>
+    <td>softvbusen</td>
+    <td>If this bit is 1, internal vbusvalid is determined by softvbus<br>
+    value, else, it¡¯s determined by vbus pin</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>23</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>22</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>21</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>19</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>18</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>17</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>15</td>
+    <td>&nbsp;</td>
+    <td>plugin</td>
+    <td>Connect detect<br>
+      When connect to the PC,this bit will set to 1. actually it is the<br>
+    same meaning of the USBEIRQ[4]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>14</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>&nbsp;</td>
+    <td>id</td>
+    <td>ID pin state.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>&nbsp;</td>
+    <td>bvalid</td>
+    <td>USB bvalid. When vbus is higher than 1.65V, this signal is 1.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>&nbsp;</td>
+    <td>vbus</td>
+    <td>Vbusvalid. The vbus detection threshold is determined by<br>
+    vbusth, when vbus is higher than threshold, vbusvalid will be 1.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>09</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>9:8 USB Linestate[1:0].</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>08</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>07</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>06</td>
+    <td>&nbsp;</td>
+    <td>vbusth</td>
+    <td><p>6:4</p>
+    <p>VBUS detection threshold control.<br>
+      000: 4.75~4.25<br>
+      001: 4.35~3.82<br>
+      010: 3.90~3.45<br>
+      011: 3.65~3.15<br>
+      100: 3.30~2.85<br>
+      101: 2.80~2.4<br>
+    110~111: Reserved</p></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>05</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>04</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>03</td>
+    <td>&nbsp;</td>
+    <td>dmpuen</td>
+    <td>500Kohm DM pull up resistor enable.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>02</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>500Kohm DP pull up resistor enable.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>01</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>DM pull down disable.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>&nbsp;</td>
+    <td>dppddis</td>
+    <td>DP pull down disable.</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

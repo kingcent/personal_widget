@@ -1,0 +1,1 @@
+logcat -s AudioService  AudioPolicyManagerBase  AudioService WiredAccessoryObserver UsbDeviceManager AudioFlinger AudioPolicyService HAL &  \r

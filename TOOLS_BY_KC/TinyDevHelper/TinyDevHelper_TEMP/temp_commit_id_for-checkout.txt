@@ -1,0 +1,5 @@
+base=f4a0f0dfd936aba0653679cac21b5cf1ff711c4e
+basetag=0823
+tag_fullname=TAG_GS702C_4110_130823
+git_dir=m:/huangjinsheng/702c2/android/frameworks/av/
+prj_dir=m:/huangjinsheng/702c2/

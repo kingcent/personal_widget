@@ -1,0 +1,20 @@
+#!/bin/sh
+for i in `cat /d/software/TOOLS_BY_KC/TinyDevHelper/TinyDevHelper_TEMP/temp_commit_id_for-checkout.txt`
+do
+	if [ ${i:0:5} = 'base=' ]; then
+		base=${i:5:${#i}}
+		echo 'commit id is:' $base
+	elif [ ${i:0:8} = 'basetag=' ]; then
+		basetag=${i:8:${#i}}
+		echo 'basetag is: ' $basetag
+	elif [ ${i:0:8} = 'git_dir=' ]; then
+		git_dir=${i:8:${#i}}
+		echo 'git dir is: ' $git_dir
+	elif [ ${i:0:8} = 'prj_dir=' ]; then
+		prj_dir=${i:8:${#i}}
+		echo 'prj_dir is: ' $prj_dir
+	fi
+done
+
+git config --replace-all core.filemode false
+git co $base

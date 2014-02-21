@@ -1,0 +1,24 @@
+ <html>
+ 	<head></head>
+ 	<body>
+ <font color=red><b>Specify username and password:</b></font> 
+    <hr>  
+    <b><u>U</u>sername:</b>  
+    <input name=Username AccessKey=u size=40 maxlength=512 >  
+    <br>  
+    <b><u>P</u>assword:</b>  
+    <input name=Password AccessKey=p size=42 maxlength=512  
+         type=password > 
+    <hr>  
+    <input name=ButtonHandler value=Nothing Clicked Yet   
+         type=hidden > 
+    <button name=OK AccessKey=O   
+         Onclick="document.all('ButtonHandler').value=OK";  
+         ><u>O</u>K </button> 
+    &nbsp;&nbsp;&nbsp;&nbsp;  
+    <button name=Cancel AccessKey=C  
+         Onclick="document.all('ButtonHandler').value=Cancel"; 
+         ><u>C</u>ancel</button>   
+    
+       </body>
+</html>         

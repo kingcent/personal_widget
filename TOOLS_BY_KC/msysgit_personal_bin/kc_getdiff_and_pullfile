@@ -1,0 +1,60 @@
+#!/bin/sh
+
+TinyDevHelpTemp_BASEDIR_LNX="/d/software/TOOLS_BY_KC/TinyDevHelper/TinyDevHelper_TEMP"
+TinyDevHelpTemp_BASEDIR_WIN="D:\software\TOOLS_BY_KC\TinyDevHelper\TinyDevHelper_TEMP\\"
+
+for i in `cat ${TinyDevHelpTemp_BASEDIR_LNX}/temp_commitid.txt`
+do
+	if [ ${i:0:5} = 'base=' ]; then
+		base=${i:5:${#i}}
+		echo 'commit id is:' $base
+	elif [ ${i:0:8} = 'basetag=' ]; then
+		basetag=${i:8:${#i}}
+		echo 'basetag is: ' $basetag
+	elif [ ${i:0:8} = 'git_dir=' ]; then
+		git_dir=${i:8:${#i}}
+		echo 'git dir is: ' $git_dir
+	elif [ ${i:0:8} = 'prj_dir=' ]; then
+		prj_dir=${i:8:${#i}}
+		echo 'prj_dir is: ' $prj_dir
+	fi
+done
+
+for i in `cat ${TinyDevHelpTemp_BASEDIR_LNX}/cur_bugfea.txt`
+do
+	if [ -n "$i" ]; then
+		CUR_BUGFEA=$i
+	fi
+done
+
+git config --replace-all core.filemode false
+git diff --name-status $base > ${TinyDevHelpTemp_BASEDIR_WIN}\diff_from_$base.txt
+
+CUR_DATE=`date +%m%d`
+BUGFEA_PATCH_DIR=/e/BUG_FEATURE_COLLECTION/${CUR_BUGFEA}/PATCHES/
+if [ -z "$basetag" ];then
+		BASE_DEST_PATH=${BUGFEA_PATCH_DIR}PATCH${CUR_DATE}_FOR_${CUR_BUGFEA}_BASE_${base:0:6}/
+else
+		BASE_DEST_PATH=${BUGFEA_PATCH_DIR}PATCH${CUR_DATE}_FOR_${CUR_BUGFEA}_BASETAG_[${basetag}]/
+fi
+inc=0
+cat ${TinyDevHelpTemp_BASEDIR_WIN}\diff_from_$base.txt |while read line
+do
+	if [ ${line:0:1} = 'D' ]; then
+		echo 'be CAREFUL! ' $line ' have been deleted!'
+	else
+		filename=$git_dir${line:2:${#line}}
+		echo "copying " $filename
+		src_dir=$(dirname $filename)
+		sub_dir=${src_dir:${#prj_dir}:${#src_dir}}'/'
+		destpath=$BASE_DEST_PATH$sub_dir
+		[ ! -d $destpath ] && mkdir -p $destpath
+		cp $filename $destpath
+	fi
+	inc=$((inc + 1))
+done
+#cp n:\\702a_bf6\\leopard\\platform\\drivers\\usb\\aotg_udc\\aotg_udc.h /e/diff_test/
+#cp /n/702a_bf6/leopard/platform/drivers/usb/aotg_udc/aotg_udc.h /e/diff_test/platform/drivers/usb/aotg_udc/aotg_udc.h
+#destpath=/e/BUG_FEATURE_COLLECTION/fea_test/PATCHES/PATCH0910_BASEON_05C2_EFWFO/
+
+#cp $i $destpath$(dirname $i) 
